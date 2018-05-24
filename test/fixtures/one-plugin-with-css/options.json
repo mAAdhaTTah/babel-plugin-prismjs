@@ -1,0 +1,4 @@
+{
+  "plugins": ["line-numbers"],
+  "css": true
+}
