@@ -15,11 +15,10 @@ export default ({ types: t }) => ({
                 t.stringLiteral(CORE)
             ));
 
-            for (const component of getComponents(opts).reverse()) {
-                path.insertAfter(
-                    t.importDeclaration([],t.stringLiteral(component))
-                );
-            }
+            path.insertAfter(
+                getComponents(opts)
+                    .map(component => t.importDeclaration([],t.stringLiteral(component)))
+            );
         }
     }
 });
