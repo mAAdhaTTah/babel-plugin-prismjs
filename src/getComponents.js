@@ -10,7 +10,7 @@ const getTheme = theme => {
     if (theme === 'default') {
         theme = 'prism';
     } else {
-        theme = `prism-${theme}`
+        theme = `prism-${theme}`;
     }
 
     return getPath('themes', theme);
@@ -32,7 +32,7 @@ const getDependencies = (type, css) => function getDependencies(deps, require) {
             const add = [];
 
             if (css && type === 'plugins' && !getNoCSS(type, name)) {
-                add.push(getPath(type, name) + '.css')
+                add.push(getPath(type, name) + '.css');
             }
 
             add.push(getPath(type, name));
