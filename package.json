@@ -20,6 +20,9 @@
     "syntax-highlighting",
     "babel-plugin"
   ],
+  "files": [
+    "lib"
+  ],
   "author": "James DiGioia <jamesorodig@gmail.com> (http://jamesdigioia.com)",
   "license": "MIT",
   "devDependencies": {
