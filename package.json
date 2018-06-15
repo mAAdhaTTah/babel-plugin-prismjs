@@ -9,6 +9,7 @@
     "debug:watch": "mocha --watch --inspect-brk --require @babel/register",
     "fix": "eslint --fix ./src ./test",
     "lint": "eslint ./src ./test",
+    "prepack": "npm run build",
     "test": "mocha --require @babel/register",
     "watch": "mocha --watch --require @babel/register"
   },
@@ -19,6 +20,9 @@
     "prismjs",
     "syntax-highlighting",
     "babel-plugin"
+  ],
+  "files": [
+    "lib"
   ],
   "author": "James DiGioia <jamesorodig@gmail.com> (http://jamesdigioia.com)",
   "license": "MIT",
