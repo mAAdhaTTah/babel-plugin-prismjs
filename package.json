@@ -22,7 +22,8 @@
     "babel-plugin"
   ],
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "author": "James DiGioia <jamesorodig@gmail.com> (http://jamesdigioia.com)",
   "license": "MIT",
