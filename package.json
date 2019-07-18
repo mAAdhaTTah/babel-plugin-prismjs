@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-prismjs",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A babel plugin to use PrismJS with standard bundlers.",
   "main": "lib/index.js",
   "scripts": {
