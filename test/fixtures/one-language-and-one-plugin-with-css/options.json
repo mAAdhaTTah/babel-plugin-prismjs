@@ -1,4 +1,5 @@
 {
+  "languages": ["javascript"],
   "plugins": ["line-numbers"],
   "css": true
 }

@@ -24,4 +24,33 @@ describe('PrismJS Configuration', () => {
             assert.equal(actual.trim(), expected.trim());
         });
     });
+
+    it(`should throw if no configuration passed`, () => {
+        assert.throws(() => {
+            transformSync('import Prism from "prismjs";', {
+                plugins: [plugin],
+                babelrc: false
+            });
+        });
+    });
+
+    it(`should throw if no languages passed`, () => {
+        assert.throws(() => {
+            transformSync('import Prism from "prismjs";', {
+                plugins: [plugin, {}],
+                babelrc: false
+            });
+        });
+    });
+
+    it(`should throw if empty languages passed`, () => {
+        assert.throws(() => {
+            transformSync('import Prism from "prismjs";', {
+                plugins: [plugin, {
+                    languages: []
+                }],
+                babelrc: false
+            });
+        });
+    });
 });
