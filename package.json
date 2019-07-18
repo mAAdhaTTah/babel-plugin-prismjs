@@ -28,13 +28,13 @@
   "author": "James DiGioia <jamesorodig@gmail.com> (http://jamesdigioia.com)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.47",
-    "@babel/core": "7.0.0-beta.47",
-    "@babel/preset-env": "7.0.0-beta.47",
-    "@babel/register": "7.0.0-beta.47",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "eslint": "^4.19.1",
     "eslint-config-valtech": "^1.1.0",
     "mocha": "^5.2.0",
-    "prismjs": "^1.14.0"
+    "prismjs": "^1.0.0"
   }
 }
