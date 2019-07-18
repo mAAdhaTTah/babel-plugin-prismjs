@@ -1,9 +1,10 @@
 import config from 'prismjs/components.js';
 
-const getPath = (type, name) =>
-    `prismjs/${config[`${type}`].meta.path.replace(/\{id\}/g, name)}`;
+const getPath = type => name =>
+    `prismjs/${config[type].meta.path.replace(/\{id\}/g, name)}`;
 
 const getRequire = (type, name) => config[type][name].require;
+const getPeers = (type, name) => config[type][name].peerDependencies;
 const getNoCSS = (type, name) => config[type][name].noCSS;
 
 const getTheme = theme => {
@@ -13,39 +14,57 @@ const getTheme = theme => {
         theme = `prism-${theme}`;
     }
 
-    return getPath('themes', theme);
+    return getPath('themes')(theme);
 };
 
-const getDependencies = (type, css) => function getDependencies(deps, require) {
-    if (!require) {
+const getDependencies = (type) => function getDependencies(deps, newDeps) {
+    if (!newDeps) {
         return deps;
     }
 
-    if (!Array.isArray(require)) {
-        require = [require];
+    if (!Array.isArray(newDeps)) {
+        newDeps = [newDeps];
     }
 
-    return require.reduce((deps, name) => {
-        deps = getDependencies(deps, getRequire(type, name));
+    deps = newDeps.reduce((deps, dep) => {
+        deps = getDependencies(deps, getRequire(type, dep));
 
-        if (deps.indexOf(getPath(type, name)) === -1) {
-            const add = [];
-
-            if (css && type === 'plugins' && !getNoCSS(type, name)) {
-                add.push(getPath(type, name) + '.css');
-            }
-
-            add.push(getPath(type, name));
-
-            deps = [...deps, ...add];
+        if (!deps.includes(dep)) {
+            deps.push(dep);
         }
 
         return deps;
     }, deps);
+
+    if (type === 'languages') {
+        deps.sort((a, b) => {
+            const aPeers = getPeers(type, a);
+            const bPeers = getPeers(type, b);
+
+            if (aPeers && aPeers.includes(b)) {
+                return 1;
+            }
+
+            if (bPeers && bPeers.includes(a)) {
+                return -1;
+            }
+            return 0;
+        });
+    }
+
+    return deps;
 };
 
 export default ({ languages = [], plugins = [], theme, css = false } = {}) => [
-    ...languages.reduce(getDependencies('languages'), []),
-    ...plugins.reduce(getDependencies('plugins', css), []),
+    ...languages.reduce(getDependencies('languages'), []).map(getPath('languages')),
+    ...plugins.reduce(getDependencies('plugins'), []).reduce((deps, dep) => {
+        const add = [getPath('plugins')(dep)];
+
+        if (css && !getNoCSS('plugins', dep)) {
+            add.unshift(getPath('plugins')(dep) + '.css');
+        }
+
+        return [...deps, ...add];
+    }, []),
     ...(css && theme ? [getTheme(theme)] : [])
 ];
