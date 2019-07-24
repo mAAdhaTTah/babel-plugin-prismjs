@@ -33,6 +33,28 @@ const getName = (type, name) => {
 const getRequire = (type, name) => config[type][name].require;
 const getPeers = (type, name) => config[type][name].peerDependencies;
 const getNoCSS = (type, name) => config[type][name].noCSS;
+const makeArray = element =>
+    // eslint-disable-next-line eqeqeq
+    element != null && !Array.isArray(element)
+        ? [element]
+        : element;
+const getAllDeps = (type, name) => {
+    const requires = makeArray(getRequire(type, name));
+    const peers = makeArray(getPeers(type, name));
+    if (requires && peers) {
+        return [...requires, ...peers];
+    }
+
+    if (requires) {
+        return requires;
+    }
+
+    if (peers) {
+        return peers;
+    }
+
+    return [];
+};
 
 const getTheme = theme => {
     if (theme === 'default') {
@@ -49,11 +71,7 @@ const getDependencies = (type) => function getDependencies(deps, newDeps) {
         return deps;
     }
 
-    if (!Array.isArray(newDeps)) {
-        newDeps = [newDeps];
-    }
-
-    deps = newDeps.reduce((deps, dep) => {
+    deps = makeArray(newDeps).reduce((deps, dep) => {
         dep = getName(type, dep);
         deps = getDependencies(deps, getRequire(type, dep));
 
@@ -65,17 +83,18 @@ const getDependencies = (type) => function getDependencies(deps, newDeps) {
     }, deps);
 
     if (type === 'languages') {
-        deps.sort((a, b) => {
-            const aPeers = getPeers(type, a);
-            const bPeers = getPeers(type, b);
+        deps.sort((b, a) => {
+            const aPeers = getAllDeps(type, a);
+            const bPeers = getAllDeps(type, b);
 
             if (aPeers && aPeers.includes(b)) {
-                return 1;
+                return -1;
             }
 
             if (bPeers && bPeers.includes(a)) {
-                return -1;
+                return 1;
             }
+
             return 0;
         });
     }

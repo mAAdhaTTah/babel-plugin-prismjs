@@ -1,0 +1,15 @@
+{
+  "languages": [
+    "clike",
+    "bash",
+    "cpp",
+    "go",
+    "java",
+    "javascript",
+    "json",
+    "kotlin",
+    "shell",
+    "objectivec",
+    "swift"
+  ]
+}
