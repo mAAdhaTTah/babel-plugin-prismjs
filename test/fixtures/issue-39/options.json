@@ -1,0 +1,6 @@
+{
+  "languages": ["javascript"],
+  "plugins": ["line-numbers", "normalize-whitespace", "diff-highlight"],
+  "theme": "default",
+  "css": true
+}
