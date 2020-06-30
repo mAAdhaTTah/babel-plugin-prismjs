@@ -34,8 +34,9 @@ describe('PrismJS Configuration', () => {
         }).code;
 
         // We expect an import for Prism core followed by 200-300 languages
-        assert.match(actual,
-            /^.+\n(?:\s*import "prismjs\/components\/prism-[\w-]+";){100,}\s*$/
-        );
+        if (!/^.+\n(?:\s*import "prismjs\/components\/prism-[\w-]+";){100,}\s*$/
+            .test(actual)) {
+            assert.fail();
+        }
     });
 });
