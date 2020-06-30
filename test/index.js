@@ -24,4 +24,18 @@ describe('PrismJS Configuration', () => {
             assert.equal(actual.trim(), expected.trim());
         });
     });
+
+    it(`should work with all languages`, () => {
+        const actual = transformSync('import Prism from "prismjs";', {
+            plugins: [
+                [plugin, { languages: 'all' }]
+            ],
+            babelrc: false
+        }).code;
+
+        // We expect an import for Prism core followed by 200-300 languages
+        assert.match(actual,
+            /^.+\n(?:\s*import "prismjs\/components\/prism-[\w-]+";){100,}\s*$/
+        );
+    });
 });
