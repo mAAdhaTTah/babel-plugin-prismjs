@@ -49,9 +49,7 @@ const getLanguagePath = getPath('languages');
  * @property {string} [theme]
  * @property {boolean} [css]
  */
-export default (options = {}) => {
-    let { languages = [], plugins = [], theme, css = false } = options;
-
+export default ({ languages = [], plugins = [], theme, css = false } = {}) => {
     if (languages === 'all') {
         languages = Object.keys(config.languages).filter(l => l !== 'meta');
     }
