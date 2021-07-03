@@ -40,5 +40,5 @@ Each key are used as follows:
 
 * `languages`: Array of languages to include in the bundle or `"all"` to include all languages. Those languages can be found [here](http://prismjs.com/#languages-list).
 * `plugins`: Array of plugins to include in the bundle. Those plugins can be found [here](http://prismjs.com/#plugins).
-* `theme`: Name of theme to include in the bundle. Themes can be found [here](http://prismjs.com/). Use `lower-kebab-case` for the theme name, e.g. `solarized-light`.
+* `theme`: Name of theme to include in the bundle. Themes can be found [here](http://prismjs.com/).
 * `css`: Boolean indicating whether to include `.css` files in the result. Defaults to `false`. If `true`, `import`s will be added for `.css` files. Must be `true` in order for `theme` to work.
