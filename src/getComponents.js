@@ -27,6 +27,10 @@ const getNoCSS = (type, name) => !!config[type][name].noCSS;
  * @returns {string}
  */
 const getThemePath = theme => {
+    if (theme.includes('/')) {
+        const [themePackage, themeName] = theme.split('/');
+        return `${themePackage}/themes/prism-${themeName}.css`
+    }
     if (theme === 'default') {
         theme = 'prism';
     } else {
