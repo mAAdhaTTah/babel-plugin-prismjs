@@ -3,6 +3,10 @@
   "version": "2.1.0",
   "description": "A babel plugin to use PrismJS with standard bundlers.",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mAAdhaTTah/babel-plugin-prismjs.git"
+  },
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib",
     "debug": "mocha --inspect-brk --require @babel/register",
