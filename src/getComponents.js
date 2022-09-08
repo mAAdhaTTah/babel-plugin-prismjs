@@ -67,7 +67,7 @@ export default ({ languages = [], plugins = [], theme, css = false } = {}) => {
                 add.unshift(getPluginPath(dep) + '.css');
             }
 
-            return [...deps, ...add];
+            return [...deps, ...add.map(dep => dep.endsWith('.css') ? dep : `${dep}.js`)];
         }, /** @type {string[]} */([])),
         ...(css && theme ? [getThemePath(theme)] : [])
     ];

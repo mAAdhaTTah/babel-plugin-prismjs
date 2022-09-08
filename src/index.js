@@ -1,6 +1,6 @@
 import getComponents from './getComponents';
 
-const CORE = 'prismjs/components/prism-core';
+const CORE = 'prismjs/components/prism-core.js';
 
 export default ({ types: t }) => ({
     name: 'prismjs',
